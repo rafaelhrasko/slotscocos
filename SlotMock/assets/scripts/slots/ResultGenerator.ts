@@ -34,10 +34,18 @@ export default class ResultGenerator extends cc.Component{
         return this.transpose2DArray(result);
     }
 
-/*  
-    
     generateDoubleLine(): Array<Array<number>> {
-    }  */
+        var result = new Array();
+        const premiumLine = Math.floor(Math.random() * 3);
+        for (let i = 0; i < 3; i += 1){
+            if (i != premiumLine){
+                result.push(this.rollMatchingLine());
+            }else{
+                result.push(this.rollUnmatchLine());
+            }
+        }        
+        return this.transpose2DArray(result);
+    }
 
     transpose2DArray(array:Array<Array<number>>):  Array<Array<number>>{
         var newArray = new Array();
