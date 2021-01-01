@@ -13,9 +13,16 @@ export default class ResultGenerator extends cc.Component{
         return this.transpose2DArray(result);
     }
 
-/*
     generateRandomTiles(): Array<Array<number>> {
+        var result = new Array();
+        for (let i = 0; i < 3; i += 1){
+            result.push(this.rollUnmatchLine());
+        }        
+        return this.transpose2DArray(result);
     }
+
+/*
+    
 
     generateSingleLine(): Array<Array<number>> {
     }
