@@ -49,7 +49,7 @@ export default class GameManager extends cc.Component {
         setTimeout(() => {
           var numberOfPossibleTiles = this.getNumberOfPossibleTiles();
           this.resultGenerator.NumberOfPossibleTiles = numberOfPossibleTiles;
-          var slotResult = this.resultGenerator.generateRandomTiles();
+          var slotResult = this.resultGenerator.generateSingleLine();
         resolve(slotResult);
       },
           1000 + 500 * Math.random());

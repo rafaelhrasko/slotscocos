@@ -21,11 +21,20 @@ export default class ResultGenerator extends cc.Component{
         return this.transpose2DArray(result);
     }
 
-/*
-    
-
     generateSingleLine(): Array<Array<number>> {
+        var result = new Array();
+        const premiumLine = Math.floor(Math.random() * 3);
+        for (let i = 0; i < 3; i += 1){
+            if (i != premiumLine){
+                result.push(this.rollUnmatchLine());
+            }else{
+                result.push(this.rollMatchingLine());
+            }
+        }        
+        return this.transpose2DArray(result);
     }
+
+/*  
     
     generateDoubleLine(): Array<Array<number>> {
     }  */
