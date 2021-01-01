@@ -5,12 +5,27 @@ export default class ResultGenerator extends cc.Component{
 
     public NumberOfPossibleTiles = 0;
 
+    getResultFromProbability():Array<Array<number>> {
+        const roll = Math.random();
+        var result = null;
+        if (roll < 0.5){
+            result = this.generateRandomTiles();
+        }else if (roll < 0.83){
+            result = this.generateSingleLine();
+        }else if (roll < 0.93){
+            result = this.generateDoubleLine();
+        }else {
+            result = this.generateAllEquals();
+        }
+        return this.transpose2DArray(result);
+    }
+
     generateAllEquals(): Array<Array<number>> {
         var result = new Array();
         for (let i = 0; i < 3; i += 1){
             result.push(this.rollMatchingLine());
         }        
-        return this.transpose2DArray(result);
+        return result;
     }
 
     generateRandomTiles(): Array<Array<number>> {
@@ -18,7 +33,7 @@ export default class ResultGenerator extends cc.Component{
         for (let i = 0; i < 3; i += 1){
             result.push(this.rollUnmatchLine());
         }        
-        return this.transpose2DArray(result);
+        return result;
     }
 
     generateSingleLine(): Array<Array<number>> {
@@ -31,7 +46,7 @@ export default class ResultGenerator extends cc.Component{
                 result.push(this.rollMatchingLine());
             }
         }        
-        return this.transpose2DArray(result);
+        return result;
     }
 
     generateDoubleLine(): Array<Array<number>> {
@@ -44,7 +59,7 @@ export default class ResultGenerator extends cc.Component{
                 result.push(this.rollUnmatchLine());
             }
         }        
-        return this.transpose2DArray(result);
+        return result;
     }
 
     transpose2DArray(array:Array<Array<number>>):  Array<Array<number>>{
