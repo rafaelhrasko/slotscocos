@@ -13,7 +13,7 @@ export default class GameManager extends cc.Component {
   private result = null;
 
   start(): void {
-    this.machine.getComponent('Machine').createMachine();
+    this.machine.getComponent('Machine').createMachine();    
   }
 
   update(): void {
@@ -41,17 +41,65 @@ export default class GameManager extends cc.Component {
     this.result = await this.getAnswer();
   }
 
-  getAnswer(): Promise<Array<Array<number>>> {
-    const slotResult = [];
+  getAnswer(): Promise<Array<Array<number>>> {    
     return new Promise<Array<Array<number>>>(resolve => {
-      setTimeout(() => {
+        setTimeout(() => {
+          var _resultGenerator = new ResultGenerator(this.getNumberOfPossibleTiles());
+          var slotResult = _resultGenerator.generateAllEquals();
         resolve(slotResult);
-      }, 1000 + 500 * Math.random());
+      },
+          1000 + 500 * Math.random());
     });
   }
 
+  generateResult(): Array<Array<number>> {
+    var random = Math.random();
+    if (random < 0.5){
+      return 
+    }
+  }
+
+  generateRandomTiles(): Array<Array<number>> {
+    var random = Math.random();
+    if (random < 0.5){
+      return 
+    }
+  }
+
+  generateSingleLine(): Array<Array<number>> {
+    const randomIndex = Math.floor(Math.random() * this.getNumberOfPossibleTiles());
+    const randomLine = Math.floor(Math.random() * 3);
+    var result = new Array();
+    for (let i = 0; i < 5; i += 1){
+      var reelResult = new Array();
+      for (let i = 0; i < 3; i += 1){
+
+        reelResult.push(randomIndex);
+      }
+      result.push(reelResult);
+    }
+    return result;
+  }
+
+  generateDoubleLine(): Array<Array<number>> {
+    const randomIndex = Math.floor(Math.random() * this.getNumberOfPossibleTiles());
+    var result = new Array();
+    for (let i = 0; i < 5; i += 1){
+      var reelResult = new Array();
+      for (let i = 0; i < 5; i += 1){
+        reelResult.push(randomIndex);
+      }
+      result.push(reelResult);
+    }
+    return result;
+  }  
+
+  getNumberOfPossibleTiles(): number {
+    return this.machine.getComponent('Machine').getNumberOfPossibleTiles();
+  }
+
   informStop(): void {
-    const resultRelayed = this.result;
+    var resultRelayed = this.result;
     this.machine.getComponent('Machine').stop(resultRelayed);
   }
 }

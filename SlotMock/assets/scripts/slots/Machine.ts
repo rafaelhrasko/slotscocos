@@ -95,9 +95,13 @@ export default class Machine extends cc.Component {
       const spinDelay = i < 2 + rngMod ? i / 4 : rngMod * (i - 2) + i / 4;
       const theReel = this.reels[i].getComponent('Reel');
 
-      setTimeout(() => {
+      setTimeout(() => {        
         theReel.readyStop(result[i]);
       }, spinDelay * 1000);
     }
+  }
+
+  getNumberOfPossibleTiles(): number {
+    return this.reels[0].getComponent('Reel').getNumberOfPossibleTiles();
   }
 }

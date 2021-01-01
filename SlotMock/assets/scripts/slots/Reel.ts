@@ -47,7 +47,7 @@ export default class Reel extends cc.Component {
 
   shuffle(): void {
     for (let i = 0; i < this.tiles.length; i += 1) {
-      this.tiles[i].getComponent('Tile').setRandom();
+        this.tiles[i].getComponent('Tile').setRandom();
     }
   }
 
@@ -130,5 +130,9 @@ export default class Reel extends cc.Component {
       .then(end)
       .then(doChange)
       .start();
+  }
+
+  getNumberOfPossibleTiles(): number {
+    return this.tiles[0].getComponent('Tile').getNumberOfTextures();
   }
 }

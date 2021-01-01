@@ -24,6 +24,10 @@ export default class Tile extends cc.Component {
     });
   }
 
+  getNumberOfTextures() : number {
+    return this.textures.length;
+  }
+
   setTile(index: number): void {
     this.node.getComponent(cc.Sprite).spriteFrame = this.textures[index];
   }
