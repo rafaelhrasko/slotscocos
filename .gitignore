@@ -72,3 +72,6 @@ creator.d.ts
 .vscode/
 
 # End of https://www.gitignore.io/api/cocoscreator
+SlotMock/assets/migration/
+SlotMock/assets/migration.meta
+SlotMock/.vs/
