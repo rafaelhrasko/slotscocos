@@ -65,7 +65,7 @@ export default class Machine extends cc.Component {
   spin(): void {
     this.spinning = true;
     this.button.getChildByName('Label').getComponent(cc.Label).string = 'STOP';
-
+    this.resetGlowsOnEveryLine();
     for (let i = 0; i < this.numberOfReels; i += 1) {
       const theReel = this.reels[i].getComponent('Reel');
 
@@ -83,9 +83,26 @@ export default class Machine extends cc.Component {
     this.button.getComponent(cc.Button).interactable = false;
   }
 
+  resetGlowsOnEveryLine(): void {
+    var children = this.node.parent.getChildByName('GlowLayout').children;
+    for (let i = 0; i < children.length; i += 1){
+        children[i].getComponent('Glows').toggleEnabled(false);
+    }
+  }
+
+  toggleGlowOnMatchingLine(result: Array<Array<number>> = null): void {
+    var children = this.node.parent.getChildByName('GlowLayout').children;
+    for (let i = 0; i < children.length; i += 1){
+        if (result[5][i] == 1){
+          children[i].getComponent('Glows').toggleEnabled(true);
+        }
+    }
+  }
+
   stop(result: Array<Array<number>> = null): void {
     setTimeout(() => {
       this.spinning = false;
+      this.toggleGlowOnMatchingLine(result);
       this.button.getComponent(cc.Button).interactable = true;
       this.button.getChildByName('Label').getComponent(cc.Label).string = 'SPIN';
     }, 2500);

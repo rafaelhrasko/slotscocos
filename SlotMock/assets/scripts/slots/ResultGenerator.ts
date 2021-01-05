@@ -24,7 +24,7 @@ export default class ResultGenerator extends cc.Component{
         var result = new Array();
         for (let i = 0; i < 3; i += 1){
             result.push(this.rollMatchingLine());
-        }        
+        }
         return result;
     }
 
@@ -107,6 +107,8 @@ export default class ResultGenerator extends cc.Component{
         for (let i = 0; i < 5; i += 1){
             result.push(possibleTiles.pop());
         }
+        //will be used as a "this line did nto matched"
+        result.push(0);
         return result;
     }
 
@@ -116,6 +118,8 @@ export default class ResultGenerator extends cc.Component{
         for (let i = 0; i < 5; i += 1){
             result.push(randomIndex);
         }
+        //will be used as a "this line matched"
+        result.push(1);
         return result;
     }
 }
